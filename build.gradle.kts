@@ -25,6 +25,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.aws.kotlin.repo.tools.artifactsizemetrics)
+    id("org.jetbrains.kotlinx.kover") version "0.8.3"
 }
 
 artifactSizeMetrics {
@@ -154,3 +155,13 @@ apiValidation {
         ),
     )
 }
+
+kover {
+    merge {
+        subprojects { subproject ->
+            subproject.path !in uncoveredProjects
+        }
+    }
+}
+
+val uncoveredProjects get() = setOf(":bom")
