@@ -130,7 +130,7 @@ tasks.jvmTest {
     val runningInLinux = System.getProperty("os.name").contains("Linux", ignoreCase = true)
     val shouldRunProxyTests = !runningInCodeBuild && runningInLinux
 
-    systemProperty(enableProxyTestsProp, System.getProperties().getOrDefault(enableProxyTestsProp, shouldRunProxyTests))
+    systemProperty(enableProxyTestsProp, false)
 }
 
 gradle.buildFinished {
